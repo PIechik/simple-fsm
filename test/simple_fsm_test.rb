@@ -8,7 +8,10 @@ class SimpleFsmTest < Minitest::Test
     refute_nil ::SimpleFsm::VERSION
   end
 
-  def test_it_does_something_useful
-    assert User.new
+  def test_class_has_initial_state
+    user = User.new
+
+    assert user.blocked?
+    assert !user.moderation?
   end
 end

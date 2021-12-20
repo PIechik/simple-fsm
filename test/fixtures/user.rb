@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+require_relative "../../lib/simple_fsm"
+
 class User
-  attr_accessor :state
+  include SimpleFsm
+
+  fsm do
+    state :blocked, initial: true
+    state :moderation
+
+    event :moderate do
+      transition from: :blocked, to: :moderation
+    end
+  end
 end
