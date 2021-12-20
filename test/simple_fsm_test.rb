@@ -8,10 +8,23 @@ class SimpleFsmTest < Minitest::Test
     refute_nil ::SimpleFsm::VERSION
   end
 
-  def test_class_has_initial_state
-    user = User.new
+  def setup
+    @user = User.new
+  end
 
-    assert user.blocked?
-    assert !user.moderation?
+  def test_class_predicate_methods
+    assert @user.blocked?
+    assert !@user.moderation?
+  end
+
+  def test_transition_to_another_state
+    @user.moderate
+    assert @user.moderation?
+  end
+
+  def test_imposible_transition
+    assert @user.blocked?
+    @user.unblock
+    assert !@user.unblocked?
   end
 end

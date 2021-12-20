@@ -8,9 +8,14 @@ class User
   fsm do
     state :blocked, initial: true
     state :moderation
+    state :unblocked
 
     event :moderate do
       transition from: :blocked, to: :moderation
+    end
+
+    event :unblock do
+      transition from: :moderation, to: :unblocked
     end
   end
 end
