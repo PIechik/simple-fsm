@@ -8,7 +8,7 @@ This gem is a simple implementation of a final state machine
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simple-fsm'
+gem 'simple-fsm', github: 'PIechik/simple-fsm'
 ```
 
 And then execute:
