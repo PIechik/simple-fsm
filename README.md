@@ -44,11 +44,11 @@ end
 You will be provided with several methods to change and check current state
 ```ruby
 user = User.new
-user.blocked? # => true
+user.blocked?                          # => true
 user.can_transfer_to_under_moderation? # => true
-user.send_to_moderate # => true
-user.blocked? # => false
-user.under_moderation? # => true
+user.send_to_moderate                  # => true
+user.blocked?                          # => false
+user.under_moderation?                 # => true
 user.can_transfer_to_under_moderation? # => false
-user.send_to_moderate # => false
+user.send_to_moderate                  # => false
 ```
