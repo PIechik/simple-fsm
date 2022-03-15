@@ -3,8 +3,6 @@
 require_relative "simple_fsm/version"
 
 module SimpleFsm
-  class Error < StandardError; end
-
   attr_reader :state
 
   def self.included(class_name)
@@ -13,6 +11,7 @@ module SimpleFsm
 
   def initialize
     @state = self.class.initial_state
+    super
   end
 
   module StateMethods
@@ -30,11 +29,11 @@ module SimpleFsm
     end
 
     def event(name)
-      transition_to = yield
+      next_state = yield
 
       define_method name do
-        if transition_to && send("can_transfer_to_#{transition_to}?")
-          instance_variable_set("@state", transition_to) ? true : false
+        if next_state && send("can_transfer_to_#{next_state}?")
+          instance_variable_set("@state", next_state) ? true : false
         end
       end
     end
