@@ -27,4 +27,9 @@ class SimpleFsmTest < Minitest::Test
     @user.unblock
     assert !@user.unblocked?
   end
+
+  def test_method_can_transfer_to
+    assert @user.can_transfer_to_moderation?
+    assert !@user.can_transfer_to_unblocked?
+  end
 end

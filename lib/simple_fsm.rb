@@ -10,11 +10,15 @@ module SimpleFsm
   end
 
   def self.initial_state=(name)
-    @@initial_state = name
+    @initial_state = name
+  end
+
+  def self.initial_state
+    @initial_state
   end
 
   def initialize
-    @state = @@initial_state
+    @state = SimpleFsm.initial_state
   end
 
   module StateMethods

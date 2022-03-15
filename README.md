@@ -1,5 +1,5 @@
-# Simple::Fsm
-[![Ruby](https://github.com/PIechik/simple-fsm/actions/workflows/main.yml/badge.svg)](https://github.com/PIechik/simple-fsm/actions/workflows/main.yml)
+# SimpleFsm
+[![Test and lint](https://github.com/PIechik/simple-fsm/actions/workflows/main.yml/badge.svg)](https://github.com/PIechik/simple-fsm/actions/workflows/main.yml)
 
 TODO: Delete this and the text above, and describe your gem
 
