@@ -1,7 +1,7 @@
 # SimpleFsm
 [![Test and lint](https://github.com/PIechik/simple-fsm/actions/workflows/main.yml/badge.svg)](https://github.com/PIechik/simple-fsm/actions/workflows/main.yml)
 
-TODO: Delete this and the text above, and describe your gem
+This gem is a simple implementation of a final state machine
 
 ## Installation
 
@@ -21,10 +21,34 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You need to include the SimpleFsm module and define states and events with their transitions. Each state must be declaired on a new line. You also must pass option `initial: true` with one of the states.
+```ruby
+class User
+  include SimpleFsm
 
-## Development
+  fsm do
+    state :blocked, initial: true
+    state :under_moderation
+    state :unblocked
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+    event :send_to_moderate do
+      transition from: :blocked, to: :under_moderation
+    end
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    event :unblock do
+      transition from: :under_moderation, to: :unblocked
+    end
+  end
+end
+```
+You will be provided with several methods to change and check current state
+```ruby
+user = User.new
+user.blocked? # => true
+user.can_transfer_to_under_moderation? # => true
+user.send_to_moderate # => true
+user.blocked? # => false
+user.under_moderation? # => true
+user.can_transfer_to_under_moderation? # => false
+user.send_to_moderate # => false
+```

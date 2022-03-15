@@ -33,17 +33,19 @@ module SimpleFsm
       transition_to = yield
 
       define_method name do
-        instance_variable_set "@state", transition_to if transition_to && send("can_transfer_to_#{transition_to}?")
+        if transition_to && send("can_transfer_to_#{transition_to}?")
+          instance_variable_set("@state", transition_to) ? true : false
+        end
       end
     end
 
     def transition(from: nil, to: nil)
       define_method "can_transfer_to_#{to}?" do
-        state = instance_variable_get "@state"
+        current_state = instance_variable_get("@state")
         if from.is_a? Array
-          from.include?(state)
+          from.include?(current_state)
         else
-          from == state
+          from == current_state
         end
       end
       to

@@ -7,15 +7,15 @@ class User
 
   fsm do
     state :blocked, initial: true
-    state :moderation
+    state :under_moderation
     state :unblocked
 
-    event :moderate do
-      transition from: :blocked, to: :moderation
+    event :send_to_moderate do
+      transition from: :blocked, to: :under_moderation
     end
 
     event :unblock do
-      transition from: :moderation, to: :unblocked
+      transition from: :under_moderation, to: :unblocked
     end
   end
 end

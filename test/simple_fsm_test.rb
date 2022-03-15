@@ -14,12 +14,12 @@ class SimpleFsmTest < Minitest::Test
 
   def test_class_predicate_methods
     assert @user.blocked?
-    assert !@user.moderation?
+    assert !@user.under_moderation?
   end
 
   def test_transition_to_another_state
-    @user.moderate
-    assert @user.moderation?
+    @user.send_to_moderate
+    assert @user.under_moderation?
   end
 
   def test_imposible_transition
@@ -29,13 +29,7 @@ class SimpleFsmTest < Minitest::Test
   end
 
   def test_method_can_transfer_to
-    assert @user.can_transfer_to_moderation?
+    assert @user.can_transfer_to_under_moderation?
     assert !@user.can_transfer_to_unblocked?
-  end
-
-  def test_state_method
-    assert @user.state == :blocked
-    @user.moderate
-    assert @user.state == :moderation
   end
 end
