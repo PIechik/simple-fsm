@@ -32,4 +32,10 @@ class SimpleFsmTest < Minitest::Test
     assert @user.can_transfer_to_moderation?
     assert !@user.can_transfer_to_unblocked?
   end
+
+  def test_state_method
+    assert @user.state == :blocked
+    @user.moderate
+    assert @user.state == :moderation
+  end
 end
